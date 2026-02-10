@@ -8,21 +8,18 @@ class MainController extends Controller
 {
 
 
-public function index($value){
+public function index(){
 
-return view('main', ['value'=>$value]);
+echo "I'm inside the app";
+
+}
+
+public function newNote(){
+
+
 }
 
 
-public function page2($value){
-
-return view('page2', ['value'=>$value]);
-}
-
-public function page3($value){
-
-return view('page3', ['value'=>$value]);
-}
 
 
 
