@@ -46,21 +46,24 @@ class AuthController extends Controller
         $username = $request ->input('text_username');
         $password = $request ->input('text_password');
 
+        //Check if users exists
+
+        $user = UserArr::where('username', $username)
+
+
         //get all users from the database
 
         //$users = User::all()->toArray();
 
         //as na object instance of the model's class
-
+/*
         $userModel = new User();
         $users = User::all()->toArray();
-
-
         echo '<pre>';
         print_r($users);
 
         //echo 'OK!';
-
+*/
         // text database conect
 /*
         try{
