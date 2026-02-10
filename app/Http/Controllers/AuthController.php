@@ -48,8 +48,43 @@ class AuthController extends Controller
 
         //Check if users exists
 
-        $user = UserArr::where('username', $username)
+        $user = User::where('username', $username)
+                        ->where('deleted_at', NULL)
+                        ->first();
 
+                        if(!$user){
+
+                            return redirect()
+                                ->back()
+                                ->withInput()
+                                ->with('loginError', 'Nome de usuário ou Senha incorretos');
+                        }
+
+                        if(!password_verify($password,$user->password)){
+
+                            return redirect()
+                                ->back()
+                                ->withInput()
+                                ->with('loginError', 'Nome de usuário ou Senha incorretos');
+                        }
+
+                    //update last login
+
+                    $user->last_login = date('Y-m-d H:i:s');
+                    $user->save();
+
+                    //Login User
+
+                    session([
+
+                        'user' =>[
+                            'id' => $user->id,
+                            'username' => $user->username
+                        ]
+                    ]);
+
+                echo 'Login Efetuado com Sucesso!!';
+//                print_r($user);
 
         //get all users from the database
 
@@ -83,7 +118,9 @@ class AuthController extends Controller
 
     public function logout(){
 
-        return 'logout';
+        session()->forget('user');
+        return redirect()->to('/login');
+
 
     }
 }

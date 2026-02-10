@@ -13,7 +13,7 @@
                 <!-- form -->
                 <div class="row justify-content-center">
                     <div class="col-md-10 col-12">
-                        <form action="/loginSubmit" method="post">
+                        <form action="/loginSubmit" method="post" novalidate>
                             @csrf
                             <div class="mb-3">
                                 <label for="text_username" class="form-label">Username</label>
@@ -38,6 +38,18 @@
                                 <button type="submit" class="btn btn-secondary w-100">LOGIN</button>
                             </div>
                         </form>
+
+                        {{-- invalid Login --}}
+
+                        @if (@session('loginError'))
+
+                            <div class="Alert alert-danger text-center">
+                                {{session('loginError')}}
+
+                            </div>
+
+                        @endif
+
                     </div>
                 </div>
 
