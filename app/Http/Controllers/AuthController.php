@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class AuthController extends Controller
 {
@@ -83,7 +84,13 @@ class AuthController extends Controller
                         ]
                     ]);
 
-                echo 'Login Efetuado com Sucesso!!';
+                //echo 'Login Efetuado com Sucesso!!';
+
+                 //Redirect to home
+
+                 return redirect()->to('/');
+
+
 //                print_r($user);
 
         //get all users from the database
@@ -114,6 +121,11 @@ class AuthController extends Controller
 
         echo 'FIM!!';*/
     }
+
+
+
+
+
 
 
     public function logout(){
