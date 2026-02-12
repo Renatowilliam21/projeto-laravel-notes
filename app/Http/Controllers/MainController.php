@@ -27,13 +27,18 @@ return view('home', ['notes' => $notes]);
 
 public function newNote(){
 
+return view('new_note');
+
+
+}
+
+public function newNoteSubmit(Request $request){
+
+    echo "Estou criando uma nota com este método";
 
 }
 
 public function editNote($id){
-
-
-//$id = $this->decryptId($id);
 
 $id = Operations::decryptId($id);
 echo "ESTOU EDITANDO A NOTA CUJO O ID É $id";
@@ -43,7 +48,6 @@ echo "ESTOU EDITANDO A NOTA CUJO O ID É $id";
 public function deleteNote($id){
 
 
-//$id = $this->decryptId($id);
 $id = Operations::decryptId($id);
 
 echo "ESTOU DELETANDO A NOTA CUJO O ID É $id";
