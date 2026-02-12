@@ -21,7 +21,7 @@ public function index(){
 
 $id = session('user.id');
 //$user = User::find($id)->toArray();
-$notes = User::find($id)->notes()->get()->toArray();
+$notes = User::find($id)->notes()->whereNull('deleted_at')->get()->toArray();
 
 
 return view('home', ['notes' => $notes]);
@@ -159,13 +159,41 @@ public function deleteNote($id){
 
 $id = Operations::decryptId($id);
 
-echo "ESTOU DELETANDO A NOTA CUJO O ID É $id";
+//load note
+$note = Note::find($id);
+
+// show delete note confirmation
+
+return view('delete_note', ['note'=> $note]);
 
 
 }
 
 
+public function deleteNoteConfirm($id){
 
+//check if $id is encrypeted
+$id = Operations::decryptId($id);
+
+// load note
+$note = Note::find($id);
+
+//1. hard delete
+
+$note->delete();
+
+//2.soft delete
+
+$note->deleted_at = date('Y:m:d H:i:s');
+$note->save();
+
+
+
+//redirect to home
+
+
+return redirect()->route('home');
+}
 
 
 
