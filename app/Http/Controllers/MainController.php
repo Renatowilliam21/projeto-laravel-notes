@@ -85,6 +85,11 @@ public function editNote($id){
 
 $id = Operations::decryptId($id);
 
+if($id== null){
+
+return redirect()->route('home');
+}
+
 
 //load note
 
@@ -137,6 +142,11 @@ public function editNoteSubmit(Request $request){
 
     $id = Operations::decryptId($request->note_id);
 
+    if($id== null){
+
+return redirect()->route('home');
+}
+
     // load note
 
     $note = Note::find($id);
@@ -159,6 +169,11 @@ public function deleteNote($id){
 
 $id = Operations::decryptId($id);
 
+if($id== null){
+
+return redirect()->route('home');
+}
+
 //load note
 $note = Note::find($id);
 
@@ -174,6 +189,11 @@ public function deleteNoteConfirm($id){
 
 //check if $id is encrypeted
 $id = Operations::decryptId($id);
+
+if($id== null){
+
+return redirect()->route('home');
+}
 
 // load note
 $note = Note::find($id);
