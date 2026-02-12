@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Note;
 use App\Models\User;
 use App\Services\Operations;
 use Illuminate\Contracts\Encryption\DecryptException;
@@ -34,7 +35,47 @@ return view('new_note');
 
 public function newNoteSubmit(Request $request){
 
-    echo "Estou criando uma nota com este método";
+    // Validate request
+
+    $request->validate(
+
+        //rules
+            ['text_title' => 'required|min:3|max:200',
+            'text_note' => 'required|min:3|max:3000'
+            ],
+            //error messages
+            [
+                'text_title.required' => 'Um Título é Obrigatório',
+                'text_title.min' => 'Um Título deve ter pelo menos :min caracteres',
+                'text_title.max' => 'Um Título deve ter no máximo :max caracteres',
+
+                'text_note.required' => 'A inserção de uma nota é Obrigatória',
+                'text_note.min' => 'Uma nota deve ter pelo menos :min caracteres',
+                'text_note.max' => 'Uma nota deve ter no máximo :max caracteres',
+            ]
+
+
+
+        );
+
+        echo "A validação deu certo";
+
+    // get user id
+
+
+    $id = session('user.id');
+
+    // create a new note
+
+    $note = new Note();
+    $note->user_id=$id;
+    $note->title = $request->text_title;
+    $note->text = $request->text_note;
+    $note->save();
+
+    // redirect  to home
+
+    return redirect()->route('home');
 
 }
 

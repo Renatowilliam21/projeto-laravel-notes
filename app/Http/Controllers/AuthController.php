@@ -84,48 +84,11 @@ class AuthController extends Controller
                         ]
                     ]);
 
-                //echo 'Login Efetuado com Sucesso!!';
 
-                 //Redirect to home
 
                  return redirect()->to('/');
 
-
-//                print_r($user);
-
-        //get all users from the database
-
-        //$users = User::all()->toArray();
-
-        //as na object instance of the model's class
-/*
-        $userModel = new User();
-        $users = User::all()->toArray();
-        echo '<pre>';
-        print_r($users);
-
-        //echo 'OK!';
-*/
-        // text database conect
-/*
-        try{
-
-        DB::connection()->getPdo();
-        echo 'Connection is OK!!';
-
-        }catch(\PDOException $e){
-
-        echo "Connection failed: " . $e->getMessage();
-
-        }
-
-        echo 'FIM!!';*/
     }
-
-
-
-
-
 
 
     public function logout(){
