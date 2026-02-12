@@ -8,6 +8,8 @@ use App\Services\Operations;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\View\View;
+use PhpParser\Node\Expr\Cast\Void_;
 
 class MainController extends Controller
 {
@@ -82,7 +84,18 @@ public function newNoteSubmit(Request $request){
 public function editNote($id){
 
 $id = Operations::decryptId($id);
-echo "ESTOU EDITANDO A NOTA CUJO O ID É $id";
+
+
+//load note
+
+$note = Note::find($id);
+
+
+//show edit note view
+
+return View('edit_note', ['note' => $note]);
+
+
 
 }
 
