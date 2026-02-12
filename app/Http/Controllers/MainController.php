@@ -35,9 +35,6 @@ public function editNote($id){
 $id = $this->decryptId($id);
 echo "ESTOU EDITANDO A NOTA CUJO O ID É $id";
 
-
-
-
 }
 
 public function deleteNote($id){
